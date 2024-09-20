@@ -16,27 +16,12 @@ cloudinary.config({
 
 const app = express();
 
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json({ limit: "15mb" }));
 app.use(express.urlencoded({ extended: true }));
-// app.use(
-//   cors({
-//     origin: process.env.CORS_ORIGIN,
-//     credentials: true,
-//   })
-// );
-
-const allowedOrigins = ["https://pgdetective-dashboard.vercel.app"];
-
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true, // Allow credentials (cookies, etc.)
+    origin: process.env.CORS_ORIGIN,
+    credentials: true,
   })
 );
 app.use(cookieParser());
