@@ -78,3 +78,26 @@ export const getSinglePg = async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 };
+
+export const deletePg = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const pg = await Pg.findById(id);
+
+    if (!pg) {
+      return res.status(404).json({ error: "Pg not found" });
+    }
+
+    if (pg.owner.toString() !== req.user._id.toString()) {
+      return res.status(403).json({ error: "You are not authorized" });
+    }
+
+    await pg.remove();
+
+    res.status(200).json({ message: "Pg deleted successfully" });
+  } catch (error) {
+    console.log("Error in deletePg controller: ", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+};
