@@ -12,7 +12,6 @@
 - 🤖 [Introduction](#-introduction)
 - ⚙️ [Tech Stack](#-tech-stack)
 - 🔋 [Features](#-features)
-- 
 
 ---
 
